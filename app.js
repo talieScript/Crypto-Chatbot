@@ -78,9 +78,11 @@ app.post('/webhook', function(req, res) {
             let sender_psid = webhook_event.sender.id;
             console.log('Sender PSID: ' + sender_psid);
             if (webhook_event.message) {
+                postback_res.typing_on(sender_psid);
                 console.log("message")
                 handleMessage(sender_psid, webhook_event.message)
             } else if (webhook_event.postback) {
+                postback_res.typing_on(sender_psid);
                 console.log("postback")
                 handlePostback(sender_psid, webhook_event.postback)
             }
@@ -130,7 +132,6 @@ const handlePostback = function(sender_psid, received_postback) {
 var reminder = function(sender_psid){
     setTimeout(function(){
         postback_res.callSendAPI(sender_psid, {
-            "sender_action":"typing_on",
             "text": "Remember you can also type in any currency code and I will find the latest price."
             });
     }, 10000);

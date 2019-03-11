@@ -32,6 +32,32 @@ const templates = {
             }
         }
     },
+
+    typing_on: function(sender_psid, response, cb) {
+
+        let request_body = {
+            "recipient": {
+                "id": sender_psid
+            },
+            "sender_action": "typing_on"
+        };
+        
+        request({
+            "uri": "https://graph.facebook.com/v2.6/me/messages?access_token="+config.get('facebook.page.access_token'),
+            "qs": { "access_token": config.get('facebook.page.access_token') },
+            "method": "POST",
+            "json": request_body
+        }, (err, res, body) => {
+            if (!err) {
+                if(cb){
+                    cb();
+                }
+            } else {
+                console.error("Unable to send message:" + err);
+            }
+        });
+    },
+     
  
     // Sends response messages via the Send API
     callSendAPI: function(sender_psid, response, cb) {
