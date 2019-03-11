@@ -1,0 +1,12 @@
+{
+    "facebook": {
+      "page": {
+        "access_token": "EAADzq2inSZCEBAMqcZBOUtn6oVO2SXEVxsOsOj6EoN8bvxBLFGf1ENQCbKrttKYLrpsjyfzTiYpzyJYWZCRngnwO45Hxtw8FVeTR9AWc6afO3JnO2QaQ99tULa6y0uVlOhpMC4YkW6IO654l0IAFUZBW9BymrC7xAcPh4DBAPwZDZD"
+      }
+    },
+    "cryptoCompare": {
+      "page": {
+        "access_token": "f85fd2078a7e2165d803dbd397373d4dfb6672559b0e5e731bdf3f59cf156c37"
+      }
+    }
+  }

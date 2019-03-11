@@ -1,0 +1,18 @@
+{
+  "name": "crypto_price_alert",
+  "version": "1.0.0",
+  "description": "crypto currency price message alert app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Taliesin Bowes De Angeli",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "config": "^3.0.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "request": "^2.88.0"
+  }
+}

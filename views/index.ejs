@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button id="getButton" onclick="get()">GET</button>
+    <h2>Bitcoin Price:</h2>
+    <pre id="getResponcePounds">£0000</pre>
+    <pre id="getResponceYen">‎¥0000</pre>
+
+    <script>
+    function get(){
+        $.ajax({
+            type: 'GET',
+            url: "/api_request",
+            dataType: 'json'
+        })
+        .done(function(data) {
+            console.log( "Sample of data:", data );
+            $('#getResponcePounds').html('£'+data.response.BTC.GBP);
+            $('#getResponceYen').html('¥'+data.response.BTC.JPY);
+        })
+        .fail(function(jqXHR, testStatus, err) {
+            console.log('AJAX error response:'+textStatus)
+        })
+    }
+    </script>
+</body>
+</html>
+
