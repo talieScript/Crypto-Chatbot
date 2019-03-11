@@ -1,4 +1,6 @@
-var config = require('config');
+const config = require('config'),
+      express = require('express'),
+      app = express();
 
 const templates = {
 
@@ -32,7 +34,7 @@ const templates = {
     },
  
     // Sends response messages via the Send API
-    callSendAPI: function(sender_psid, response, cb = null) {
+    callSendAPI: function(sender_psid, response, cb) {
         // Construct the message body
         let request_body = {
             "recipient": {

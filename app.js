@@ -95,18 +95,18 @@ app.post('/webhook', function(req, res) {
  
 });
 
+var sendTextMessage
+
 // Handles messages events
 const handleMessage = function(sender_psid, received_message) {
     let response;
-    let payload = received_message.text;
- 
+    let payload = received_message.text.toUpperCase();
     function talk(prices){
-            response = postback_res.askTemplate(prices)
+            response = { "text": prices }
             postback_res.callSendAPI(sender_psid, response);
         }
     cryptoCompare.getCryptoPrice(payload, talk);
 }
-
  
 // Hnadles postback events
 const handlePostback = function(sender_psid, received_postback) {
@@ -116,9 +116,8 @@ const handlePostback = function(sender_psid, received_postback) {
     if(payload === 'GET_STARTED'){
         response = postback_res.askTemplate('To start pick a crypto currency to hear the latest price');
         postback_res.callSendAPI(sender_psid, response);
-    } else if(payload === 'MORE'){
-        
-    }
+        reminder(sender_psid);
+    } 
     else {
         function talk(prices){
             response = postback_res.askTemplate(prices)
@@ -126,6 +125,15 @@ const handlePostback = function(sender_psid, received_postback) {
         }
         cryptoCompare.getCryptoPrice(payload, talk);
     }
+}
+
+var reminder = function(sender_psid){
+    setTimeout(function(){
+        postback_res.callSendAPI(sender_psid, {
+            "sender_action":"typing_on",
+            "text": "Remember you can also type in any currency code and I will find the latest price."
+            });
+    }, 10000);
 }
 
 app.listen("8000", function(){
