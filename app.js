@@ -97,24 +97,29 @@ app.post('/webhook', function(req, res) {
  
 });
 
-var sendTextMessage
-
 // Handles messages events
 const handleMessage = function(sender_psid, received_message) {
     let response;
     let payload = received_message.text.toUpperCase();
-    function talk(prices){
+    postback_res.typing_off(sender_psid);
+    if(payload.includes("SAYAKA") || payload.includes("さやか")) {
+        postback_res.callSendAPI(sender_psid, {"text": "I love you and miss you, あなたを愛しています \n from Taliesin(たりー)"})
+    } else if(payload.includes("HELLO") || payload.includes("HI")) {
+        postback_res.callSendAPI(sender_psid, {"text": "Hello!"});
+    } else {
+        function talk(prices){
             response = { "text": prices }
             postback_res.callSendAPI(sender_psid, response);
         }
-    cryptoCompare.getCryptoPrice(payload, talk);
+        cryptoCompare.getCryptoPrice(payload, talk);
+    }
 }
  
 // Hnadles postback events
 const handlePostback = function(sender_psid, received_postback) {
     let response;
     let payload = received_postback.payload;
- 
+    postback_res.typing_off(sender_psid);
     if(payload === 'GET_STARTED'){
         response = postback_res.askTemplate('To start pick a crypto currency to hear the latest price');
         postback_res.callSendAPI(sender_psid, response);
